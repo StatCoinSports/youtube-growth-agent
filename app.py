@@ -50,11 +50,11 @@ def oauth2callback():
 
     flow.fetch_token(authorization_response=request.url)
     credentials = flow.credentials
+    refresh_token = credentials.refresh_token
 
-    print("✅ REFRESH TOKEN:", credentials.refresh_token)
+    print("✅ REFRESH TOKEN:", refresh_token)
 
     return "✅ Success! You’re connected to YouTube. You can close this tab."
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
