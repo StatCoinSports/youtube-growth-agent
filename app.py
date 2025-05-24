@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
+from flask import Flask, request, jsonify
 from google_auth_oauthlib.flow import Flow
 from utils.youtube import get_subscribers
 
@@ -14,6 +15,7 @@ def home():
 def stats():
     data = get_subscribers()
     return jsonify(data)
+
 @app.route('/authorize')
 def authorize():
     flow = Flow.from_client_config(
@@ -32,6 +34,7 @@ def authorize():
 
     auth_url, _ = flow.authorization_url(prompt='consent', access_type='offline')
     return f'<a href="{auth_url}">Click here to log in with YouTube</a>'
+
 @app.route('/oauth2callback')
 def oauth2callback():
     flow = Flow.from_client_config(
@@ -53,8 +56,8 @@ def oauth2callback():
     refresh_token = credentials.refresh_token
 
     print("✅ REFRESH TOKEN:", refresh_token)
-
     return "✅ Success! You’re connected to YouTube. You can close this tab."
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
+
