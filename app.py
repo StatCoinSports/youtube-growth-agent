@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import os
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 from google_auth_oauthlib.flow import Flow
 from utils.youtube import get_subscribers
 
