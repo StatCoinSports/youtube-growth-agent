@@ -31,6 +31,9 @@ def authorize():
 
     auth_url, _ = flow.authorization_url(prompt='consent', access_type='offline')
     return f'<a href="{auth_url}">Click here to log in with YouTube</a>'
+@app.route('/oauth2callback')
+def oauth2callback():
+    return 'OAuth callback received!'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
